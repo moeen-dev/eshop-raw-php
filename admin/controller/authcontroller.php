@@ -5,7 +5,7 @@ if (isset($_POST['register'])) {
     $name = trim($_POST['user_name']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
-    $confirmed_password = $_POST['confirmed_password'];
+    $confirmed_password = $_POST['confirm_password'];
 
     $errors = [];
 
@@ -14,18 +14,19 @@ if (isset($_POST['register'])) {
 
     // validation rule
     if (empty($name) || empty($email) || empty($password) || empty($confirmed_password)) {
-        $errors = 'All fields are required!';
+        $errors[] = 'All fields are required!';
+    } else {
+        // confirmed password
+        if ($password !== $confirmed_password) {
+            $errors[] = 'Password do not matched!';
+        }
     }
 
     // Check email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors = 'Invalid email format!';
+        $errors[] = 'Invalid email format!';
     }
 
-    // Confirmed password
-    if ($password !== $confirmed_password) {
-        $errors = 'Password do not matched!';
-    }
 
     // Insert data to admins table
     if (!empty($errors)) {

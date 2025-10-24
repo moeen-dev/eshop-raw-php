@@ -68,19 +68,19 @@ include_once 'controller/db.php';
                             <form method="POST" action="controller/authcontroller.php">
                                 <div class="form-group">
                                     <label>Username</label>
-                                    <input type="text" name="user_name" id="user_name" class="form-control p_input">
+                                    <input type="text" name="user_name" id="user_name" class="form-control p_input" autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" name="email" id="email" class="form-control p_input">
+                                    <input type="email" name="email" id="email" class="form-control p_input" autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="password" name="password" id="password" class="form-control p_input">
+                                    <input type="password" name="password" id="password" class="form-control p_input" autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Confirm Password</label>
-                                    <input type="password" name="confrim_password" id="confrim_password" class="form-control p_input">
+                                    <input type="password" name="confirm_password" id="confirm_password" class="form-control p_input" autocomplete="off" required>
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" name="register" class="btn btn-primary btn-block enter-btn">Register</button>

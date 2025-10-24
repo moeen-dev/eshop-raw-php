@@ -3,7 +3,7 @@
 $dbservername = 'localhost';
 $dbusername = 'root';
 $dbpassword = '';
-$dbtablename = 'userinfo';
+$dbtablename = 'eshop_task';
 
 $conn = new mysqli($dbservername, $dbusername, $dbpassword, $dbtablename);
 
