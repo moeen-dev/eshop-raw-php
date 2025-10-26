@@ -63,6 +63,11 @@ if (isset($_POST['login'])) {
             $_SESSION['email'] = $user['email'];
             $_SESSION['name'] = $user['name'];
 
+            if (isset($_POST['remeber_me'])) {
+                setcookie("email", $email, time() + (86400 * 30), "/");
+                setcookie("password", $password, time() + (86400 * 30), "/");
+            }
+
             $_SESSION['success'] = "Login Successful!";
             header("Location: ../index.php");
             exit();

@@ -1,3 +1,8 @@
+<?php
+include_once 'controller/db.php';
+$email_cookie = isset($_COOKIE['email']) ? $_COOKIE['email'] : '';
+$password_cookie = isset($_COOKIE['password']) ? $_COOKIE['password'] : '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,16 +66,16 @@
                             <form method="POST" action="controller/authcontroller.php">
                                 <div class="form-group">
                                     <label>Username or email *</label>
-                                    <input type="email" name="email" id="email" class="form-control p_input">
+                                    <input type="email" name="email" id="email" class="form-control p_input" value="<?php echo $email_cookie; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label>Password *</label>
-                                    <input type="text" name="password" id="password" class="form-control p_input">
+                                    <input type="password" name="password" id="password" class="form-control p_input" value="<?php echo $password_cookie; ?>">
                                 </div>
                                 <div class="form-group d-flex align-items-center justify-content-between">
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input"> Remember me </label>
+                                            <input type="checkbox" name="remeber_me" class="form-check-input"> Remember me </label>
                                     </div>
                                     <!-- <a href="#" class="forgot-pass">Forgot password</a> -->
                                 </div>
