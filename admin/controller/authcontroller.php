@@ -48,3 +48,31 @@ if (isset($_POST['register'])) {
         }
     }
 }
+
+if (isset($_POST['login'])) {
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    $sql = "SELECT * FROM admins WHERE email = '$email'";
+    $query = $conn->query($sql);
+
+    if ($query && $query->num_rows > 0) {
+        $user = $query->fetch_assoc();
+
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['name'] = $user['name'];
+
+            $_SESSION['success'] = "Login Successful!";
+            header("Location: ../index.php");
+            exit();
+        } else {
+            $_SESSION['errors'] = ['Wrong Password!'];
+        }
+    } else {
+        $_SESSION['errors'] = ['No user found with this email!'];
+    }
+
+    header("Location: ../login.php");
+    exit();
+}

@@ -58,14 +58,14 @@
                             }
                             ?>
 
-                            <form>
+                            <form method="POST" action="controller/authcontroller.php">
                                 <div class="form-group">
                                     <label>Username or email *</label>
-                                    <input type="text" class="form-control p_input">
+                                    <input type="email" name="email" id="email" class="form-control p_input">
                                 </div>
                                 <div class="form-group">
                                     <label>Password *</label>
-                                    <input type="text" class="form-control p_input">
+                                    <input type="text" name="password" id="password" class="form-control p_input">
                                 </div>
                                 <div class="form-group d-flex align-items-center justify-content-between">
                                     <div class="form-check">
@@ -75,7 +75,7 @@
                                     <!-- <a href="#" class="forgot-pass">Forgot password</a> -->
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                                    <button type="submit" name="login" class="btn btn-primary btn-block enter-btn">Login</button>
                                 </div>
                                 <p class="sign-up">Don't have an Account?<a href="register.php"> Sign Up</a></p>
                             </form>

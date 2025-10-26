@@ -1,3 +1,10 @@
+<?php
+include_once 'controller/db.php';
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -313,7 +320,7 @@ include_once 'partials/head.php';
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <?php 
+    <?php
     include_once 'partials/script.php';
     ?>
     <!-- End custom js for this page -->
