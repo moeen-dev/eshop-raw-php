@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="assets/vendors/js/vendor.bundle.base.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
@@ -16,3 +18,27 @@
 <!-- endinject -->
 <!-- Custom js for this page -->
 <script src="assets/js/dashboard.js"></script>
+
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "timeOut": "3000"
+    }
+</script>
+
+<?php
+
+if (isset($_SESSION['toastr'])) {
+    $type = $_SESSION['toastr']['type'];
+    $message = $_SESSION['toastr']['message'];
+    echo "
+    <script>
+        toastr.$type('$message');
+    </script>
+    ";
+    unset($_SESSION['toastr']); // Clear message after showing
+}
+
+?>

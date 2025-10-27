@@ -68,14 +68,23 @@ if (isset($_POST['login'])) {
                 setcookie("password", $password, time() + (86400 * 30), "/");
             }
 
-            $_SESSION['success'] = "Login Successful!";
+            $_SESSION['toastr'] = [
+                'type' => 'success',
+                'message' => 'Login Successful!'
+            ];
             header("Location: ../index.php");
             exit();
         } else {
-            $_SESSION['errors'] = ['Wrong Password!'];
+            $_SESSION['toastr'] = [
+                'type' => 'error',
+                'message' => 'Wrong Password!'
+            ];
         }
     } else {
-        $_SESSION['errors'] = ['No user found with this email!'];
+        $_SESSION['toastr'] = [
+            'type' => 'error',
+            'message' => 'No user found with this email!'
+        ];
     }
 
     header("Location: ../login.php");

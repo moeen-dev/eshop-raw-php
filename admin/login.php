@@ -21,6 +21,7 @@ $password_cookie = isset($_COOKIE['password']) ? $_COOKIE['password'] : '';
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- End layout styles -->
     <!-- <link rel="shortcut icon" href="assets/images/favicon.png" /> -->
 </head>
@@ -33,35 +34,6 @@ $password_cookie = isset($_COOKIE['password']) ? $_COOKIE['password'] : '';
                     <div class="card col-lg-4 mx-auto">
                         <div class="card-body px-5 py-5">
                             <h3 class="card-title text-left mb-3">Login</h3>
-                            <?php
-                            // Error Message
-                            if (isset($_SESSION['errors'])) {
-                                foreach ($_SESSION['errors'] as $error) {
-                                    echo '
-                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            <strong>Error!</strong> ' . htmlspecialchars($error) . '
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>';
-                                }
-                                unset($_SESSION['errors']);
-                            }
-
-                            // Success Message
-                            if (isset($_SESSION['success'])) {
-                                foreach ($_SESSION['success'] as $error) {
-                                    echo '
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            <strong>Error!</strong> ' . htmlspecialchars($error) . '
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>';
-                                }
-                                unset($_SESSION['success']);
-                            }
-                            ?>
 
                             <form method="POST" action="controller/authcontroller.php">
                                 <div class="form-group">
@@ -95,6 +67,8 @@ $password_cookie = isset($_COOKIE['password']) ? $_COOKIE['password'] : '';
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
@@ -105,7 +79,30 @@ $password_cookie = isset($_COOKIE['password']) ? $_COOKIE['password'] : '';
     <script src="assets/js/misc.js"></script>
     <script src="assets/js/settings.js"></script>
     <script src="assets/js/todolist.js"></script>
+
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000"
+        }
+    </script>
     <!-- endinject -->
+    <?php
+
+    if (isset($_SESSION['toastr'])) {
+        $type = $_SESSION['toastr']['type'];
+        $message = $_SESSION['toastr']['message'];
+        echo "
+    <script>
+        toastr.$type('$message');
+    </script>
+    ";
+        unset($_SESSION['toastr']); // Clear message after showing
+    }
+    
+    ?>
 </body>
 
 </html>

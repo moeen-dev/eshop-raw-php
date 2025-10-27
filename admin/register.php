@@ -33,37 +33,6 @@ include_once 'controller/db.php';
                     <div class="card col-lg-4 mx-auto">
                         <div class="card-body px-5 py-5">
                             <h3 class="card-title text-left mb-3 text-center">Register</h3>
-                            
-                            <?php
-                            // Error Message
-                            if (isset($_SESSION['errors'])) {
-                                foreach ($_SESSION['errors'] as $error) {
-                                    echo '
-                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            <strong>Error!</strong> ' . htmlspecialchars($error) . '
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>';
-                                }
-                                unset($_SESSION['errors']); 
-                            }
-
-                            // Success Message
-                            if (isset($_SESSION['success'])) {
-                                foreach ($_SESSION['success'] as $error) {
-                                    echo '
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            <strong>Error!</strong> ' . htmlspecialchars($error) . '
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>';
-                                }
-                                unset($_SESSION['success']);
-                            }
-                            ?>
-
 
                             <form method="POST" action="controller/authcontroller.php">
                                 <div class="form-group">
