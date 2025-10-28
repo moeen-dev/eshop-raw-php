@@ -38,11 +38,11 @@ $password_cookie = isset($_COOKIE['password']) ? $_COOKIE['password'] : '';
                             <form method="POST" action="controller/authcontroller.php">
                                 <div class="form-group">
                                     <label>Username or email *</label>
-                                    <input type="email" name="email" id="email" class="form-control p_input" value="<?php echo $email_cookie; ?>">
+                                    <input type="email" name="email" id="email" class="form-control p_input" value="<?php echo $email_cookie; ?>" autocomplete="off" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Password *</label>
-                                    <input type="password" name="password" id="password" class="form-control p_input" value="<?php echo $password_cookie; ?>">
+                                    <input type="password" name="password" id="password" class="form-control p_input" value="<?php echo $password_cookie; ?>" autocomplete="off" required>
                                 </div>
                                 <div class="form-group d-flex align-items-center justify-content-between">
                                     <div class="form-check">

@@ -177,7 +177,11 @@
                             </div>
                         </div>
                         <div class="preview-item-content">
-                            <p class="preview-subject mb-1">Log out</p>
+                            <form action="controller/logout.php" method="POST" style="margin:0;">
+                                <button type="submit" class="preview-item-content" style="border:none; background:none; cursor:pointer;">
+                                    <p class="preview-subject mb-1 text-white">Log out</p>
+                                </button>
+                            </form>
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>
