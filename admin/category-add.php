@@ -1,3 +1,10 @@
+<?php
+include_once 'controller/db.php';
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,20 +35,14 @@ include_once 'partials/head.php';
                                     <p class="card-description"> Basic form elements </p>
                                     <form class="forms-sample" action="controller/categorycontroller.php" method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <label for="exampleInputName1">Name</label>
-                                            <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                                            <label for="categoryName">Category Name</label>
+                                            <input type="text" name="categoryName" class="form-control" id="categoryName" placeholder="Category Name" autocomplete="off" required>
                                         </div>
                                         <div class="form-group">
-                                            <label>File upload</label>
-                                            <input type="file" name="img[]" class="file-upload-default">
-                                            <div class="input-group col-xs-12">
-                                                <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                                                <span class="input-group-append">
-                                                    <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                                                </span>
-                                            </div>
+                                            <label for="categoryImage">Category Image</label>
+                                            <input type="file" name="categoryImage" class="form-control" id="categoryImage" required>
                                         </div>
-                                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                                        <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
                                         <button class="btn btn-dark">Cancel</button>
                                     </form>
                                 </div>
