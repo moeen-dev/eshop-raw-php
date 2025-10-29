@@ -15,11 +15,17 @@ if (isset($_POST['submit'])) {
     }
 
     // Image Upload directory
-    $dir = "../upload/" . $image;
+    $uploadDir  = "../upload/";
 
-    $sql = "INSERT INTO categories (`name`, `image`) VALUES ('$name', '$image')";
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
 
-    if (move_uploaded_file($tmp_name, $dir)) {
+    $filePath = $uploadDir . $imageName;
+
+    $sql = "INSERT INTO categories (`name`, `image`) VALUES ('$categoryName', '$image')";
+
+    if (move_uploaded_file($tmp_name, $filePath )) {
         $query = $conn->query($sql);
 
         if ($query == TRUE) {

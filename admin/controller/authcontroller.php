@@ -64,8 +64,8 @@ if (isset($_POST['login'])) {
             $_SESSION['name'] = $user['name'];
 
             if (isset($_POST['remeber_me'])) {
-                setcookie("email", $email, time() + (86400 * 7), "/");
-                setcookie("password", $password, time() + (86400 * 7), "/");
+                setcookie("email", $email, time() + (86400 * 30), "/");
+                setcookie("password", $password, time() + (86400 * 30), "/");
             }
 
             $_SESSION['toastr'] = [
