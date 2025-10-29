@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     $errors = [];
 
     // Validation
-    if (empty($categoryName) || empty($image['name'])) {
+    if (empty($categoryName) || empty($_FILES['image']['name'])) {
         $errors[] = 'Category name and image are required!';
     }
 
@@ -24,16 +24,32 @@ if (isset($_POST['submit'])) {
     $filePath = $uploadDir . $imageName;
 
     $sql = "INSERT INTO categories (`name`, `image`) VALUES ('$categoryName', '$image')";
+    $query = $conn->query($sql);
 
-    if (move_uploaded_file($tmp_name, $filePath )) {
-        $query = $conn->query($sql);
+    if (move_uploaded_file($tmp_name, $filePath)) {
+
 
         if ($query == TRUE) {
+            $_SESSION['toastr'] = [
+                'type' => 'success',
+                'message' => 'Successful!'
+            ];
             header("Location: ../category-list.php");
+            exit();
         } else {
+            $_SESSION['toastr'] = [
+                'type' => 'error',
+                'message' => 'Error!'
+            ];
             header("Location: ../category-add.php?error=save error");
+            exit();
         }
     } else {
+        $_SESSION['toastr'] = [
+            'type' => 'info',
+            'message' => 'Failed!'
+        ];
         header("Location: ../category-add.php?error=upload error");
+        exit();
     }
 }
