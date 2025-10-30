@@ -4,7 +4,7 @@ include_once 'db.php';
 if (isset($_POST['submit'])) {
     // Get form Data
     $categoryName = trim($_POST['categoryName']);
-    $image = rand() . date('m-d-Y') . "-" . $_FILES['categoryImage']['name'];
+    $image = rand(100, 999) . '-' . date('m-d-Y') . "-" . $_FILES['categoryImage']['name'];
     $tmp_name = $_FILES['categoryImage']['tmp_name'];
 
     $errors = [];
