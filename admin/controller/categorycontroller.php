@@ -4,13 +4,13 @@ include_once 'db.php';
 if (isset($_POST['submit'])) {
     // Get form Data
     $categoryName = trim($_POST['categoryName']);
-    $image = rand() . date('m-d-Y') . "-" . $_FILES['image']['name'];
-    $tmp_name = $_FILES['image']['tmp_name'];
+    $image = rand() . date('m-d-Y') . "-" . $_FILES['categoryImage']['name'];
+    $tmp_name = $_FILES['categoryImage']['tmp_name'];
 
     $errors = [];
 
     // Validation
-    if (empty($categoryName) || empty($_FILES['image']['name'])) {
+    if (empty($categoryName) || empty($_FILES['categoryImage']['name'])) {
         $errors[] = 'Category name and image are required!';
     }
 
@@ -21,25 +21,25 @@ if (isset($_POST['submit'])) {
         mkdir($uploadDir, 0777, true);
     }
 
-    $filePath = $uploadDir . $imageName;
+    $filePath = $uploadDir . $image;
 
     $sql = "INSERT INTO categories (`name`, `image`) VALUES ('$categoryName', '$image')";
     $query = $conn->query($sql);
 
-    if (move_uploaded_file($tmp_name, $filePath)) {
 
+    if (move_uploaded_file($tmp_name, $filePath)) {
 
         if ($query == TRUE) {
             $_SESSION['toastr'] = [
                 'type' => 'success',
-                'message' => 'Successful!'
+                'message' => 'Category Added Successful!'
             ];
             header("Location: ../category-list.php");
             exit();
         } else {
             $_SESSION['toastr'] = [
                 'type' => 'error',
-                'message' => 'Error!'
+                'message' => 'Something Went Wrong!'
             ];
             header("Location: ../category-add.php?error=save error");
             exit();
@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
     } else {
         $_SESSION['toastr'] = [
             'type' => 'info',
-            'message' => 'Failed!'
+            'message' => 'Upload Failed!'
         ];
         header("Location: ../category-add.php?error=upload error");
         exit();
