@@ -40,7 +40,7 @@ include_once 'partials/head.php';
                                             <input type="file" name="categoryImage" class="form-control" id="categoryImage" required>
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
-                                        <button class="btn btn-dark">Cancel</button>
+                                        <button class="btn btn-dark" name="cancel" onclick="window.location.href='category-list.php'">Cancel</button>
                                     </form>
                                 </div>
                             </div>
