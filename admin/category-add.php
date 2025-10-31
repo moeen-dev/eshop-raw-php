@@ -37,7 +37,7 @@ include_once 'partials/head.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="categoryImage">Category Image</label>
-                                            <input type="file" name="categoryImage" class="form-control" id="categoryImage" required>
+                                            <input type="file" name="categoryImage" class="dropify" id="categoryImage" required>
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
                                         <button class="btn btn-dark" name="cancel" onclick="window.location.href='category-list.php'">Cancel</button>
