@@ -26,7 +26,8 @@ include_once 'partials/head.php';
                 <div class="col-lg-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Striped Table</h4>
+                            <h4 class="card-title">Category Table</h4>
+                            <a href="category-add.php" class="btn btn-primary">Add Category</a>
                             <!-- <p class="card-description"> Add class <code>.table-striped</code> -->
                             </p>
                             <div class="table-responsive">
@@ -36,6 +37,7 @@ include_once 'partials/head.php';
                                             <th> # </th>
                                             <th> Category Image </th>
                                             <th> Category Name </th>
+                                            <th> Actions </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,6 +55,13 @@ include_once 'partials/head.php';
                                                         <img src="upload/<?php echo $category['image']; ?>" alt="<?php echo $category['name']; ?>" />
                                                     </td>
                                                     <td> <?php echo $category['name']; ?> </td>
+                                                    <td class="d-flex gap-3">
+                                                        <a href="category-edit.php?id=<?php echo $category['id']; ?>" class="btn btn-primary mr-2"> Edit</a>
+                                                        <form action="controller/categorycontroller.php" method="POST">
+                                                            <input type="hidden" name="id" value="<?php echo $category['id']; ?>">
+                                                            <button name="delete" class="btn btn-danger" onclick="return confirm('Do you want to delete it?') ">Delete</button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                         <?php
                                             }
@@ -81,7 +90,6 @@ include_once 'partials/head.php';
     <?php
     include_once 'partials/script.php';
     ?>
-    <!-- End custom js for this page -->
 </body>
 
 </html>
