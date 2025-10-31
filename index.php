@@ -1,3 +1,6 @@
+<?php
+include_once 'controller/db.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,7 +74,7 @@ include_once 'partials/head.php';
     <!-- Humberger End -->
 
     <!-- Header Section Begin -->
-    <?php 
+    <?php
     include_once 'partials/nav.php';
     ?>
     <!-- Header Section End -->
@@ -100,31 +103,23 @@ include_once 'partials/head.php';
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="assets/img/categories/cat-1.jpg">
-                            <h5><a href="#">Fresh Fruit</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="assets/img/categories/cat-2.jpg">
-                            <h5><a href="#">Dried Fruit</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="assets/img/categories/cat-3.jpg">
-                            <h5><a href="#">Vegetables</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="assets/img/categories/cat-4.jpg">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="assets/img/categories/cat-5.jpg">
-                            <h5><a href="#">drink fruits</a></h5>
-                        </div>
-                    </div>
+                    <?php
+                    $sql = "SELECT * FROM categories";
+                    $query = $conn->query($sql);
+
+                    if ($query->num_rows > 0) {
+                        while ($category = $query->fetch_assoc()) {
+                    ?>
+                            <div class="col-lg-3">
+                                <div class="categories__item set-bg" data-setbg="admin/upload/<?php echo $category['image']; ?>">
+                                    <h5><a href="#"><?php echo $category['name']; ?></a></h5>
+                                </div>
+                            </div>
+                    <?php
+                        }
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>
