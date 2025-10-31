@@ -4,7 +4,7 @@ include_once 'db.php';
 if (isset($_POST['submit'])) {
     // Get form Data
     $categoryName = trim($_POST['categoryName']);
-    $image = rand(100, 999) . '-' . date('m-d-Y') . "-" . $_FILES['categoryImage']['name'];
+    $image = rand(100, 999) . '-' . date('mdY') . "-" . $_FILES['categoryImage']['name'];
     $tmp_name = $_FILES['categoryImage']['tmp_name'];
 
     $errors = [];
@@ -12,6 +12,16 @@ if (isset($_POST['submit'])) {
     // Validation
     if (empty($categoryName) || empty($_FILES['categoryImage']['name'])) {
         $errors[] = 'Category name and image are required!';
+    }
+
+    // If any field blank not upload
+    if (!empty($errors)) {
+        $_SESSION['toastr'] = [
+            'type' => 'error',
+            'message' => implode(', ', $errors)
+        ];
+        header("Location: ../category-add.php?error=validation");
+        exit();
     }
 
     // Image Upload directory

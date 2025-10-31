@@ -1,9 +1,6 @@
 <?php
 include_once 'controller/db.php';
-if (!isset($_SESSION['email'])) {
-    header("Location: login.php");
-    exit;
-}
+include_once 'partials/auth.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
