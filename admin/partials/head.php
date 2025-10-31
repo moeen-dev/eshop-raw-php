@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+    <link rel="stylesheet" href="assets/vendors/dropify/css/dropify.min.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -20,6 +21,5 @@
     <!-- End layout styles -->
     <!-- <link rel="shortcut icon" href="assets/images/favicon.png" /> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <!-- Dropify CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropify/0.2.2/css/dropify.min.css" />
+
 </head>

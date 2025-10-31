@@ -1,6 +1,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropify/0.2.2/js/dropify.min.js"></script>
 <script src="assets/vendors/js/vendor.bundle.base.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->
@@ -9,6 +8,7 @@
 <script src="assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
 <script src="assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <script src="assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+<script src="assets/vendors/dropify/js/dropify.min.js"></script>
 <!-- End plugin js for this page -->
 <!-- inject:js -->
 <script src="assets/js/off-canvas.js"></script>
@@ -43,3 +43,8 @@ if (isset($_SESSION['toastr'])) {
 }
 
 ?>
+<script>
+    $(document).ready(function() {
+        $('.dropify').dropify();
+    });
+</script>

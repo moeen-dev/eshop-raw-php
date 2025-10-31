@@ -34,7 +34,7 @@ include_once 'partials/head.php';
                                     if (isset($_GET['id'])) {
                                         $id = $_GET['id'];
 
-                                        $sql = "SELECT * FROM categories WHERE id = id";
+                                        $sql = "SELECT * FROM categories WHERE id = $id";
                                         $query = $conn->query($sql);
 
                                         if ($query->num_rows > 0) {
@@ -47,7 +47,7 @@ include_once 'partials/head.php';
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="categoryImage">Category Image</label>
-                                                        <input type="file" name="categoryImage" class="form-image" data-default-file="upload/<?php echo $category['image']; ?>" id=" categoryImage" required>
+                                                        <input type="file" name="categoryImage" class="dropify" data-default-file="upload/<?php echo $category['image']; ?>" id="categoryImage" required>
                                                     </div>
                                                     <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
                                                     <button class="btn btn-dark" name="cancel" onclick="window.location.href='category-list.php'">Cancel</button>
