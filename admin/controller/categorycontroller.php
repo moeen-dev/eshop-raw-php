@@ -152,3 +152,39 @@ if (isset($_POST['update'])) {
         exit();
     }
 }
+
+// Category Destroy
+if (isset($_POST['delete'])) {
+    $id = intval($_POST['id']);
+
+    $imgSql = "SELECT image FROM categories WHERE id = $id";
+    $imgQuery = $conn->query($imgSql);
+
+    if ($imgQuery->num_rows > 0) {
+        $rowImage = $imgQuery->fetch_assoc();
+        $image = $rowImage['image'];
+        $imagePath = "../upload/" . $image;
+
+        if (!empty($image) && file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+    }
+
+    $sql = "DELETE FROM categories WHERE id = $id";
+    $query = $conn->query($sql);
+
+    if ($query) {
+        $_SESSION['toastr'] = [
+            'type' => 'success',
+            'message' => 'Category deleted successfully!'
+        ];
+    } else {
+        $_SESSION['toastr'] = [
+            'type' => 'error',
+            'message' => 'Failed to delete category!'
+        ];
+    }
+
+    header("Location: ../category-list.php");
+    exit();
+}
