@@ -41,15 +41,16 @@ include_once 'partials/head.php';
                                             while ($category = $query->fetch_assoc()) {
                                     ?>
                                                 <form class="forms-sample" action="controller/categorycontroller.php" method="POST" enctype="multipart/form-data">
+                                                    <input type="hidden" name="id" value="<?php echo $category['id']; ?>">
                                                     <div class="form-group">
                                                         <label for="categoryName">Category Name</label>
-                                                        <input type="text" name="categoryName" class="form-control" value="<?php echo $category['name']; ?>" id="categoryName" placeholder="Category Name" autocomplete="off" required>
+                                                        <input type="text" name="categoryName" class="form-control" value="<?php echo $category['name']; ?>" id="categoryName" placeholder="Category Name" autocomplete="off">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="categoryImage">Category Image</label>
-                                                        <input type="file" name="categoryImage" class="dropify" data-default-file="upload/<?php echo $category['image']; ?>" id="categoryImage" required>
+                                                        <input type="file" name="categoryImage" class="dropify" data-default-file="upload/<?php echo $category['image']; ?>" id="categoryImage">
                                                     </div>
-                                                    <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
+                                                    <button type="submit" name="update" class="btn btn-primary mr-2">Update</button>
                                                     <button class="btn btn-dark" name="cancel" onclick="window.location.href='category-list.php'">Cancel</button>
                                                 </form>
                                     <?php
