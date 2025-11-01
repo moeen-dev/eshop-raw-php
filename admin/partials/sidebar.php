@@ -29,11 +29,20 @@
                     <li class="nav-item"> <a class="nav-link" href="category-add.php">Add Category</a></li>
                 </ul>
             </div>
-            <!-- Product Item -->
+        </li>
+        <!-- Product -->
+        <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-icon">
+                    <i class="mdi mdi-laptop"></i>
+                </span>
+                <span class="menu-title">Product</span>
+                <i class="menu-arrow"></i>
+            </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="category-list.php">All Category</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="category-add.php">Add Category</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="product/product-list.php">All Product</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="product/product-create.php">Add Product</a></li>
                 </ul>
             </div>
         </li>
