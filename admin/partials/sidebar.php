@@ -27,7 +27,13 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="category-list.php">All Category</a></li>
                     <li class="nav-item"> <a class="nav-link" href="category-add.php">Add Category</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                </ul>
+            </div>
+            <!-- Product Item -->
+            <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="category-list.php">All Category</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="category-add.php">Add Category</a></li>
                 </ul>
             </div>
         </li>
