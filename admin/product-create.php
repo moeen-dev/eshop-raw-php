@@ -1,25 +1,25 @@
 <?php
-include_once '../controller/db.php';
-include_once '../partials/auth.php';
+include_once 'controller/db.php';
+include_once 'partials/auth.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <?php
-include_once '../partials/head.php';
+include_once 'partials/head.php';
 ?>
 
 <body>
     <div class="container-scroller">
-        <!-- partial:../partials/_sidebar.html -->
+        <!-- partial:partials/_sidebar.html -->
         <?php
-        include_once '../partials/sidebar.php';
+        include_once 'partials/sidebar.php';
         ?>
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            <!-- partial:../partials/_navbar.html -->
+            <!-- partial:partials/_navbar.html -->
             <?php
-            include_once '../partials/navbar.php';
+            include_once 'partials/navbar.php';
             ?>
             <!-- partial -->
             <div class="main-panel">
@@ -48,9 +48,9 @@ include_once '../partials/head.php';
                     </div>
                 </div>
                 <!-- content-wrapper ends -->
-                <!-- partial:../partials/_footer.html -->
+                <!-- partial:partials/_footer.html -->
                 <?php
-                include_once '../partials/footer.php';
+                include_once 'partials/footer.php';
                 ?>
                 <!-- partial -->
             </div>
@@ -61,7 +61,7 @@ include_once '../partials/head.php';
     <!-- container-scroller -->
     <!-- plugins:js -->
     <?php
-    include_once '../partials/script.php';
+    include_once 'partials/script.php';
     ?>
     <!-- End custom js for this page -->
 </body>

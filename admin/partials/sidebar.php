@@ -41,8 +41,8 @@
             </a>
             <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="product/product-list.php">All Product</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="product/product-create.php">Add Product</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="product-list.php">All Product</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="product-create.php">Add Product</a></li>
                 </ul>
             </div>
         </li>
