@@ -30,14 +30,18 @@ include_once 'partials/head.php';
                                 <div class="card-body">
                                     <h4 class="card-title">Basic form elements</h4>
                                     <p class="card-description"> Basic form elements </p>
-                                    <form class="forms-sample" action="controller/categorycontroller.php" method="POST" enctype="multipart/form-data">
+                                    <form class="forms-sample" action="controller/productcontrolle.php" method="POST" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="productName">Product Name <span class="text-danger">*</span></label>
+                                            <input type="text" name="productName" class="form-controle" id="productName" placeholder="Product Name" autocomplete="off" required>
+                                        </div>
                                         <div class="form-group">
                                             <label for="categoryName">Category Name</label>
                                             <input type="text" name="categoryName" class="form-control" id="categoryName" placeholder="Category Name" autocomplete="off" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="categoryImage">Category Image</label>
-                                            <input type="file" name="categoryImage" class="dropify" id="categoryImage" required>
+                                            <label for="productImage">Product Image</label>
+                                            <input type="file" name="productImage" class="dropify" id="productImage" required>
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
                                         <button class="btn btn-dark" name="cancel" onclick="window.location.href='category-list.php'">Cancel</button>
