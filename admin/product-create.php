@@ -30,18 +30,57 @@ include_once 'partials/head.php';
                                 <div class="card-body">
                                     <h4 class="card-title">Basic form elements</h4>
                                     <p class="card-description"> Basic form elements </p>
+                                    
                                     <form class="forms-sample" action="controller/productcontrolle.php" method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label for="productName">Product Name <span class="text-danger">*</span></label>
-                                            <input type="text" name="productName" class="form-controle" id="productName" placeholder="Product Name" autocomplete="off" required>
+                                            <input type="text" name="productName" class="form-control" id="productName" placeholder="Product Name" autocomplete="off" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="categoryName">Category Name</label>
-                                            <input type="text" name="categoryName" class="form-control" id="categoryName" placeholder="Category Name" autocomplete="off" required>
+                                            <select name="productCategory" id="productCategory" class="form-control" required>
+                                                <option selected disabled>--Select Product Category--</option>
+                                                <?php
+                                                $sql = "SELECT id, name FROM categories";
+                                                $query = $conn->query($sql);
+
+                                                if ($query->num_rows > 0) {
+                                                    while ($category = $query->fetch_assoc()) {
+                                                ?>
+                                                        <option value="<?php echo $category['id'] ?>"><?php echo $category['name'] ?></option>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
+
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="productImage">Product Image</label>
                                             <input type="file" name="productImage" class="dropify" id="productImage" required>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="price">Price <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="price" id="price" placeholder="Enter product price" required autocomplete="off">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="status">Status <span class="text-danger">*</span></label>
+                                                    <select name="status" id="status" class="form-control">
+                                                        <option selected disabled>--Please select an option--</option>
+                                                        <option value="in_stock">In Stock</option>
+                                                        <option value="out_stock">Out of Stock</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description">Product Description (Optional)</label>
+                                            <textarea name="description" id="description" class="form-control" rows="10"></textarea>
                                         </div>
                                         <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
                                         <button class="btn btn-dark" name="cancel" onclick="window.location.href='category-list.php'">Cancel</button>
