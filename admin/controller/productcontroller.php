@@ -11,22 +11,34 @@ if (isset($_POST['submit'])) {
 
     // Image file handle
     $image = rand(100, 999) . '-' . date('mdY') . $_FILES['productImage']['name'];
-    $tmp_name = $_FILES['categoryImage']['tmp_name'];
+    $tmp_name = $_FILES['productImage']['tmp_name'];
 
+    // Store errors with an array
     $errors = [];
 
-    // Erorr handling
+    // Validation for each filed
     if (empty($productName) || empty($productCategory) || empty($price) || empty($status) || empty($description) || empty($_FILES['productImage']['name'])) {
-        $errors = "Every fileds are required!";
+        $errors[] = "Every field is required!";
     }
 
-    // If any field blank not upload 
+    // If any filed blank not upload to database
     if (!empty($errors)) {
         $_SESSION['toastr'] = [
             'type' => 'error',
             'message' => implode(', ', $errors)
         ];
-        header("Location: ../product-add.php?error=validation");
+        header("Location: ../category-add.php?error=validation");
         exit();
     }
+
+    // Image Upload directory
+    $uploadDir = "../upload/";
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    $filePath = $uploadDir . $image;
+
+    $sql = "INSERT INTO products "
 }
