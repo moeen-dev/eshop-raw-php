@@ -31,7 +31,7 @@ include_once 'partials/head.php';
                                     <h4 class="card-title">Basic form elements</h4>
                                     <p class="card-description"> Basic form elements </p>
                                     
-                                    <form class="forms-sample" action="controller/productcontrolle.php" method="POST" enctype="multipart/form-data">
+                                    <form class="forms-sample" action="controller/productcontroller.php" method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label for="productName">Product Name <span class="text-danger">*</span></label>
                                             <input type="text" name="productName" class="form-control" id="productName" placeholder="Product Name" autocomplete="off" required>
