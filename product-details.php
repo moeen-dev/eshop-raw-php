@@ -79,97 +79,94 @@ include_once 'partials/head.php';
     ?>
     <!-- Header Section End -->
 
-    <!-- Hero Section Begin -->
-    <section class="hero">
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="assets/img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="hero__item set-bg" data-setbg="assets/img/hero/banner.jpg">
-                        <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Vegetable’s Package</h2>
+                        <div class="breadcrumb__option">
+                            <a href="./index.html">Home</a>
+                            <a href="./index.html">Vegetables</a>
+                            <span>Vegetable’s Package</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Hero Section End -->
+    <!-- Breadcrumb Section End -->
 
-    <!-- Categories Section Begin -->
-    <section class="categories">
+    <!-- Product Details Section Begin -->
+    <section class="product-details spad">
         <div class="container">
-            <div class="row">
-                <div class="categories__slider owl-carousel">
-                    <?php
-                    $sql = "SELECT * FROM categories";
-                    $query = $conn->query($sql);
+            <?php
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
 
-                    if ($query->num_rows > 0) {
-                        while ($category = $query->fetch_assoc()) {
-                    ?>
-                            <div class="col-lg-3">
-                                <div class="categories__item set-bg" data-setbg="admin/upload/<?php echo $category['image']; ?>">
-                                    <h5><a href="#"><?php echo $category['name']; ?></a></h5>
-                                </div>
-                            </div>
-                    <?php
-                        }
-                    }
-                    ?>
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Categories Section End -->
-
-    <!-- Featured Section Begin -->
-    <section class="featured spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>Featured Product</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row featured__filter">
-                <?php
-                $sql = "SELECT * FROM products";
+                $sql = "SELECT * FROM products WHERE id = $id";
                 $query = $conn->query($sql);
 
                 if ($query->num_rows > 0) {
                     while ($product = $query->fetch_assoc()) {
-                ?>
-                        <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                            <div class="featured__item">
-                                <div class="featured__item__pic set-bg" data-setbg="admin/upload/<?php echo $product['image']; ?>">
-                                    <ul class="featured__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+            ?>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="product__details__pic">
+                                    <div class="product__details__pic__item">
+                                        <img class="product__details__pic__item--large"
+                                            src="admin/upload/<?php echo $product['image']; ?>" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="product__details__text">
+                                    <h3><?php echo $product['name']; ?></h3>
+                                    <div class="product__details__price">$<?php echo $product['price']; ?></div>
+                                    <div class="product__details__quantity">
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <input type="text" value="1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="primary-btn">Buy Now</a>
+                                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                                    <ul>
+                                        <li><b>Availability</b> <span> <?php echo ($product['status'] == 'in_stock') ? 'In Stock' : 'Out of Stock'; ?></span></li>
+                                        <li><b>Weight</b> <span>0.5 kg</span></li>
                                     </ul>
                                 </div>
-                                <div class="featured__item__text">
-                                    <h6><a href="product-details.php?id=<?php echo $product['id']; ?>"><?php echo $product['name']; ?></a></h6>
-                                    <h5>$<?php echo $product['price'] ?></h5>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="product__details__tab">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                                aria-selected="true">Description</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                            <div class="product__details__tab__desc">
+                                                <h6>Products Infomation</h6>
+                                                <p><?Php echo $product['description'] ?></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                <?php
+            <?php
                     }
-                } else {
-                    echo "No Products Found!";
                 }
-                ?>
+            }
+            ?>
 
-            </div>
         </div>
     </section>
-    <!-- Featured Section End -->
+    <!-- Product Details Section End -->
 
     <!-- Banner Begin -->
     <div class="banner">
