@@ -87,15 +87,11 @@ if (isset($_POST['update'])) {
         $oldImage = $oldImageQuery->fetch_assoc()['image'];
     }
 
-    // Image file handle
-    // $image = rand(100, 999) . '-' . date('mdY') . $_FILES['productImage']['name'];
-    // $tmp_name = $_FILES['productImage']['tmp_name'];
-
     // Store errors with an array
     $errors = [];
 
     // Validation for each filed
-    if (empty($productName) || empty($productCategory) || empty($price) || empty($status) || empty($description) || empty($_FILES['productImage']['name'])) {
+    if (empty($productName) || empty($productCategory) || empty($price) || empty($status) || empty($description)) {
         $errors[] = "Every field is required!";
     }
 
@@ -122,8 +118,9 @@ if (isset($_POST['update'])) {
 
     if (!empty($_FILES['productImage']['name'])) {
         $image = rand(10, 99) . '-' . date('mdY') . '-' . basename($_FILES['productImage']['name']);
-        $tmp_name = $files['productImage']['tmp_name'];
+        $tmp_name = $_FILES['productImage']['tmp_name'];
         $uploadDir = "../upload/";
+        $filePath = $uploadDir . $image;
 
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0777, true);
@@ -139,40 +136,44 @@ if (isset($_POST['update'])) {
         }
 
         // Old image delete
-        if (empty($oldImage) && file_exists("../upload/" . $oldImage)) {
+        if (!empty($oldImage) && file_exists("../upload/" . $oldImage)) {
             unlink("../upload/" . $oldImage);
         }
-
-        $sql = "UPDATE products SET name='$productName', image='$image' WHERE id = $id";
+        // update all field 
+        $sql = "UPDATE products 
+                SET name='$productName', 
+                    category_id='$productCategory', 
+                    price='$price', 
+                    status='$status', 
+                    description='$description', 
+                    image='$image' 
+                WHERE id = $id";
+    } else {
+        // Update without image
+        $sql = "UPDATE products 
+                SET name='$productName', 
+                    category_id='$productCategory', 
+                    price='$price', 
+                    status='$status', 
+                    description='$description' 
+                WHERE id = $id";
     }
 
-    $filePath = $uploadDir . $image;
-
-    $sql = "INSERT INTO products (`name`, `category_id`, `image`, `price`, `status`, `description`) VALUES ('$productName', '$productCategory', '$image', '$price', '$status', '$description')";
     $query = $conn->query($sql);
 
-    if (move_uploaded_file($tmp_name, $filePath)) {
-
-        if ($query == TRUE) {
-            $_SESSION['toastr'] = [
-                'type' => 'success',
-                'message' => 'Product Added Successful!'
-            ];
-            header("Location: ../product-add.php?error=save error");
-        } else {
-            $_SESSION['toastr'] = [
-                'type' => 'error',
-                'message' => 'Something Went Wrong!'
-            ];
-            header("Location: ../product-add.php?error=save error");
-            exit();
-        }
+    if ($query === TRUE) {
+        $_SESSION['toastr'] = [
+            'type' => 'success',
+            'message' => 'Product Updated Successfully!'
+        ];
+        header("Location: ../product-list.php");
+        exit();
     } else {
         $_SESSION['toastr'] = [
-            'type' => 'info',
-            'message' => 'Upload Failed!'
+            'type' => 'error',
+            'message' => 'Database update failed!'
         ];
-        header("Location: ../product-add.php?error=upload error");
+        header("Location: ../product-edit.php?id=$id&error=db");
         exit();
     }
 }

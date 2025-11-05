@@ -51,12 +51,12 @@ include_once 'partials/head.php';
                                                 <div class="form-group">
                                                     <label for="productName">Product Name <span class="text-danger">*</span></label>
                                                     <input type="text" name="productName" class="form-control" id="productName"
-                                                        placeholder="Product Name" value="<?php echo htmlspecialchars($product['name']); ?>" required>
+                                                        placeholder="Product Name" value="<?php echo htmlspecialchars($product['name']); ?>">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="categoryName">Category Name</label>
-                                                    <select name="productCategory" id="productCategory" class="form-control" required>
+                                                    <select name="productCategory" id="productCategory" class="form-control">
                                                         <option disabled>--Select Product Category--</option>
                                                         <?php
                                                         if ($categoriesQuery->num_rows > 0) {
@@ -74,8 +74,8 @@ include_once 'partials/head.php';
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="categoryImage">Category Image</label>
-                                                    <input type="file" name="categoryImage" class="dropify" data-default-file="upload/<?php echo $product['image']; ?>" id="categoryImage">
+                                                    <label for="productImage">Category Image</label>
+                                                    <input type="file" name="productImage" class="dropify" data-default-file="upload/<?php echo $product['image']; ?>" id="categoryImage">
                                                 </div>
 
                                                 <div class="row">
@@ -84,14 +84,14 @@ include_once 'partials/head.php';
                                                             <label for="price">Price <span class="text-danger">*</span></label>
                                                             <input type="text" class="form-control" name="price" id="price"
                                                                 placeholder="Enter product price"
-                                                                value="<?php echo htmlspecialchars($product['price']); ?>" required autocomplete="off">
+                                                                value="<?php echo htmlspecialchars($product['price']); ?>">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="status">Status <span class="text-danger">*</span></label>
-                                                            <select name="status" id="status" class="form-control" required>
+                                                            <select name="status" id="status" class="form-control">
                                                                 <option disabled>--Please select an option--</option>
                                                                 <option value="in_stock" <?php if ($product['status'] == 'in_stock') echo 'selected'; ?>>In Stock</option>
                                                                 <option value="out_stock" <?php if ($product['status'] == 'out_stock') echo 'selected'; ?>>Out of Stock</option>
