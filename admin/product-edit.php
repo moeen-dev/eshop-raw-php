@@ -30,61 +30,93 @@ include_once 'partials/head.php';
                                 <div class="card-body">
                                     <h4 class="card-title">Basic form elements</h4>
                                     <p class="card-description"> Basic form elements </p>
+                                    <?php
+                                    if (isset($_GET['id'])) {
+                                        $id = $_GET['id'];
 
-                                    <form class="forms-sample" action="controller/productcontroller.php" method="POST" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <label for="productName">Product Name <span class="text-danger">*</span></label>
-                                            <input type="text" name="productName" class="form-control" id="productName" placeholder="Product Name" autocomplete="off" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="categoryName">Category Name</label>
-                                            <select name="productCategory" id="productCategory" class="form-control" required>
-                                                <option selected disabled>--Select Product Category--</option>
-                                                <?php
-                                                $sql = "SELECT id, name FROM categories";
-                                                $query = $conn->query($sql);
+                                        // Fetch product by ID
+                                        $productSql = "SELECT * FROM products WHERE id = $id";
+                                        $productQuery = $conn->query($productSql);
 
-                                                if ($query->num_rows > 0) {
-                                                    while ($category = $query->fetch_assoc()) {
-                                                ?>
-                                                        <option value="<?php echo $category['id'] ?>"><?php echo $category['name'] ?></option>
-                                                <?php
-                                                    }
-                                                }
-                                                ?>
+                                        if ($productQuery && $productQuery->num_rows > 0) {
+                                            $product = $productQuery->fetch_assoc();
 
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="productImage">Product Image</label>
-                                            <input type="file" name="productImage" class="dropify" id="productImage" required>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                            // Fetch categories
+                                            $categoriesSql = "SELECT id, name FROM categories";
+                                            $categoriesQuery = $conn->query($categoriesSql);
+                                    ?>
+                                            <form class="forms-sample" action="controller/productcontroller.php" method="POST" enctype="multipart/form-data">
+                                                <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
+
                                                 <div class="form-group">
-                                                    <label for="price">Price <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" name="price" id="price" placeholder="Enter product price" required autocomplete="off">
+                                                    <label for="productName">Product Name <span class="text-danger">*</span></label>
+                                                    <input type="text" name="productName" class="form-control" id="productName"
+                                                        placeholder="Product Name" value="<?php echo htmlspecialchars($product['name']); ?>" required>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="status">Status <span class="text-danger">*</span></label>
-                                                    <select name="status" id="status" class="form-control">
-                                                        <option selected disabled>--Please select an option--</option>
-                                                        <option value="in_stock">In Stock</option>
-                                                        <option value="out_stock">Out of Stock</option>
+                                                    <label for="categoryName">Category Name</label>
+                                                    <select name="productCategory" id="productCategory" class="form-control" required>
+                                                        <option disabled>--Select Product Category--</option>
+                                                        <?php
+                                                        if ($categoriesQuery->num_rows > 0) {
+                                                            while ($category = $categoriesQuery->fetch_assoc()) {
+                                                                $selected = ($category['id'] == $product['category_id']) ? 'selected' : '';
+                                                        ?>
+                                                                <option value="<?php echo $category['id']; ?>" <?php echo $selected; ?>>
+                                                                    <?php echo $category['name']; ?>
+                                                                </option>
+                                                        <?php
+                                                            }
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="description">Product Description (Optional)</label>
-                                            <textarea name="description" id="description" class="form-control" rows="10"></textarea>
-                                        </div>
-                                        <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
-                                        <button class="btn btn-dark" name="cancel" onclick="window.location.href='category-list.php'">Cancel</button>
-                                    </form>
+
+                                                <div class="form-group">
+                                                    <label for="categoryImage">Category Image</label>
+                                                    <input type="file" name="categoryImage" class="dropify" data-default-file="upload/<?php echo $product['image']; ?>" id="categoryImage">
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="price">Price <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" name="price" id="price"
+                                                                placeholder="Enter product price"
+                                                                value="<?php echo htmlspecialchars($product['price']); ?>" required autocomplete="off">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="status">Status <span class="text-danger">*</span></label>
+                                                            <select name="status" id="status" class="form-control" required>
+                                                                <option disabled>--Please select an option--</option>
+                                                                <option value="in_stock" <?php if ($product['status'] == 'in_stock') echo 'selected'; ?>>In Stock</option>
+                                                                <option value="out_stock" <?php if ($product['status'] == 'out_stock') echo 'selected'; ?>>Out of Stock</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="description">Product Description (Optional)</label>
+                                                    <textarea name="description" id="description" class="form-control" rows="10"><?php echo htmlspecialchars($product['description']); ?></textarea>
+                                                </div>
+
+                                                <button type="submit" name="update" class="btn btn-primary mr-2">Update</button>
+                                                <button type="button" class="btn btn-dark" onclick="window.location.href='category-list.php'">Cancel</button>
+                                            </form>
+                                    <?php
+                                        } else {
+                                            echo "<p class='text-danger'>No Data Found!</p>";
+                                        }
+                                    } else {
+                                        echo "<p class='text-danger'>No Product ID Provided!</p>";
+                                    }
+                                    ?>
+
                                 </div>
                             </div>
                         </div>
