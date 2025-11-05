@@ -121,7 +121,7 @@ if (isset($_POST['update'])) {
             exit();
         }
 
-        // ✅ Delete old image if exists
+        // Delete old image if exists
         if (!empty($oldImage) && file_exists("../upload/" . $oldImage)) {
             unlink("../upload/" . $oldImage);
         }

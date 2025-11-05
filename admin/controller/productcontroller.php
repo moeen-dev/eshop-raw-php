@@ -71,17 +71,25 @@ if (isset($_POST['submit'])) {
 
 
 // Update Logic
-if (isset($_POST['submit'])) {
+if (isset($_POST['update'])) {
     // Get form data
+    $id = $_POST['id'];
     $productName = trim($_POST['productName']);
     $productCategory = trim($_POST['productCategory']);
     $price = trim($_POST['price']);
     $status = $_POST['status'];
     $description = trim($_POST['description']);
 
+    // old image check
+    $oldImageQuery = $conn->query("SELECT image FROM products WHERE id = $id");
+    $oldImage = '';
+    if ($oldImageQuery->num_rows > 0) {
+        $oldImage = $oldImageQuery->fetch_assoc()['image'];
+    }
+
     // Image file handle
-    $image = rand(100, 999) . '-' . date('mdY') . $_FILES['productImage']['name'];
-    $tmp_name = $_FILES['productImage']['tmp_name'];
+    // $image = rand(100, 999) . '-' . date('mdY') . $_FILES['productImage']['name'];
+    // $tmp_name = $_FILES['productImage']['tmp_name'];
 
     // Store errors with an array
     $errors = [];
@@ -91,21 +99,51 @@ if (isset($_POST['submit'])) {
         $errors[] = "Every field is required!";
     }
 
+    // Check product name for unique
+    $checkSql = "SELECT * FROM products WHERE name = '$productName' AND id != '$id'";
+    $checkQuery = $conn->query($checkSql);
+    if ($checkQuery->num_rows > 0) {
+        $errors[] = 'Product Name Already exists!';
+    }
+
+    if (empty($oldImage) && empty($_FILES['productImage']['name'])) {
+        $errors[] = 'Image is required!';
+    }
+
     // If any filed blank not upload to database
     if (!empty($errors)) {
         $_SESSION['toastr'] = [
             'type' => 'error',
             'message' => implode(', ', $errors)
         ];
-        header("Location: ../product-add.php?error=validation");
+        header("Location: ../product-edit.php?id=$id&error=validation");
         exit();
     }
 
-    // Image Upload directory
-    $uploadDir = "../upload/";
+    if (!empty($_FILES['productImage']['name'])) {
+        $image = rand(10, 99) . '-' . date('mdY') . '-' . basename($_FILES['productImage']['name']);
+        $tmp_name = $files['productImage']['tmp_name'];
+        $uploadDir = "../upload/";
 
-    if (!is_dir($uploadDir)) {
-        mkdir($uploadDir, 0777, true);
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        if (!move_uploaded_file($tmp_name, $filePath)) {
+            $_SESSION['toastr'] = [
+                'type' => 'error',
+                'message' => 'Image upload failed!'
+            ];
+            header("Location: ../product-edit.php?id=$id&error=upload");
+            exit();
+        }
+
+        // Old image delete
+        if (empty($oldImage) && file_exists("../upload/" . $oldImage)) {
+            unlink("../upload/" . $oldImage);
+        }
+
+        $sql = "UPDATE products SET name='$productName', image='$image' WHERE id = $id";
     }
 
     $filePath = $uploadDir . $image;
