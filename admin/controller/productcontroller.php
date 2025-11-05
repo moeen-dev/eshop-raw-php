@@ -177,3 +177,40 @@ if (isset($_POST['update'])) {
         exit();
     }
 }
+
+
+// product destroy
+if (isset($_POST['delete'])) {
+    $id = intval($_POST['id']);
+
+    $imgSql = "SELECT image FROM products WHERE id = $id";
+    $imgQuery = $conn->query($imgSql);
+
+    if ($imgQuery->num_rows > 0) {
+        $rowImage = $imgQuery->fetch_assoc();
+        $image = $rowImage['image'];
+        $imagePath = "../upload/" . $image;
+
+        if (!empty($image) && file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+    }
+
+    $sql = "DELETE FROM products WHERE id = $id";
+    $query = $conn->query($sql);
+
+    if ($query) {
+        $_SESSION['toastr'] = [
+            'type' => 'success',
+            'message' => 'Product deleted successfully!'
+        ];
+    } else {
+        $_SESSION['toastr'] = [
+            'type' => 'error',
+            'message' => 'Failed to delete Product!'
+        ];
+    }
+
+    header("Location: ../product-list.php");
+    exit();
+}
