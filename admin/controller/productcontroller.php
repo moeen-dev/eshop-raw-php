@@ -50,7 +50,7 @@ if (isset($_POST['submit'])) {
                 'type' => 'success',
                 'message' => 'Product Added Successful!'
             ];
-            header("Location: ../product-add.php?error=save error");
+            header("Location: ../product-list.php");
         } else {
             $_SESSION['toastr'] = [
                 'type' => 'error',
