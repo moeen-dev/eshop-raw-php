@@ -51,3 +51,19 @@ if (isset($_POST['update_quantity'])) {
 }
 
 header("Location: ../cart-product.php");
+
+// remove item
+if (isset($_POST['remove_item'])) {
+    $id = $_POST['id'];
+    foreach ($_SESSION['cart'] as $key => $item) {
+        if ($item['id'] == $id) {
+            unset($_SESSION['cart'][$key]);
+            break;
+        }
+    }
+    // Reindex array
+    $_SESSION['cart'] = array_values($_SESSION['cart']);
+}
+
+header("Location: ../cart-product.php");
+exit;

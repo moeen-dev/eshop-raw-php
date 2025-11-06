@@ -140,7 +140,7 @@ include_once 'partials/head.php';
                                                 $<?php echo number_format($total, 2); ?>
                                             </td>
                                             <td class="shoping__cart__item__close">
-                                                <form action="controller/remove_cart.php" method="POST">
+                                                <form action="controller/cart.php" method="POST">
                                                     <input type="hidden" name="id" value="<?php echo $item['id']; ?>">
                                                     <button type="submit" name="remove_item" style="border:none;background:none;cursor:pointer;">
                                                         <span class="icon_close"></span>
