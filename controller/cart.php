@@ -33,6 +33,21 @@ if (isset($_POST['add_to_cart'])) {
         $_SESSION['cart'][] = $item;
     }
 
-    header("Location: cart.php");
+    header("Location: ../cart-product.php");
     exit;
 }
+
+// Update 
+if (isset($_POST['update_quantity'])) {
+    $id = $_POST['id'];
+    $quantity = max(1, (int)$_POST['quantity']);
+
+    foreach ($_SESSION['cart'] as &$item) {
+        if ($item['id'] == $id) {
+            $item['quantity'] = $quantity;
+            break;
+        }
+    }
+}
+
+header("Location: ../cart-product.php");
