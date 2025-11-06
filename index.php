@@ -148,9 +148,20 @@ include_once 'partials/head.php';
                             <div class="featured__item">
                                 <div class="featured__item__pic set-bg" data-setbg="admin/upload/<?php echo $product['image']; ?>">
                                     <ul class="featured__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li>
+                                            <form action="controller/cart.php" method="POST">
+                                                <input type="hidden" name="id" value="<?php echo $product['id']; ?>">
+                                                <input type="hidden" name="name" value="<?php echo $product['name']; ?>">
+                                                <input type="hidden" name="price" value="<?php echo $product['price']; ?>">
+                                                <input type="hidden" name="image" value="<?php echo $product['image']; ?>">
+                                                <input type="hidden" name="quantity" value="1">
+
+                                                <!-- button with icon -->
+                                                <button type="submit" name="add_to_cart" style="border:none; background:none; cursor:pointer;">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                </button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="featured__item__text">
