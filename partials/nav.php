@@ -45,14 +45,10 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="index.php">Home</a></li>
-                        <li><a href="shop-page.php">Shop</a></li>
-                        <li><a href="#">Pages</a>
-                            <ul class="header__menu__dropdown">
-                                <li><a href="category-page.php">Shop Details</a></li>
-                                <li><a href="cart-product.php">Shoping Cart</a></li>
-                            </ul>
-                        </li>
+                        <?php $page = basename($_SERVER['PHP_SELF']); ?>
+                        <li class="<?php if ($page == 'index.php') echo 'active'; ?>"><a href="index.php">Home</a></li>
+                        <li class="<?php if ($page == 'category-product.php') echo 'active'; ?>"><a href="category-product.php">Category</a></li>
+                        <li class="<?php if ($page == 'shop-page.php') echo 'active'; ?>"><a href="shop-page.php">Shop</a></li>
                     </ul>
                 </nav>
             </div>
