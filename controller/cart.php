@@ -33,6 +33,8 @@ if (isset($_POST['add_to_cart'])) {
         $_SESSION['cart'][] = $item;
     }
 
+    setcookie('cart_data', json_encode($_SESSION['cart']), time() + (3 * 24 * 60 * 60), "/");
+
     header("Location: ../cart-product.php");
     exit;
 }
