@@ -78,7 +78,7 @@ include_once 'partials/head.php';
     include_once 'partials/nav.php';
     ?>
     <!-- Header Section End -->
-
+    
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="assets/img/breadcrumb.jpg">
         <div class="container">

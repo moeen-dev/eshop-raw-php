@@ -112,7 +112,7 @@ include_once 'partials/head.php';
                     ?>
                             <div class="col-lg-3">
                                 <div class="categories__item set-bg" data-setbg="admin/upload/<?php echo $category['image']; ?>">
-                                    <h5><a href="#"><?php echo $category['name']; ?></a></h5>
+                                    <h5><a href="shop-page.php?category_id=<?php echo $category['id']; ?>"><?php echo $category['name']; ?></a></h5>
                                 </div>
                             </div>
                     <?php

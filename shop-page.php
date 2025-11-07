@@ -104,7 +104,13 @@ include_once 'partials/head.php';
                 <div class="col-lg-12 col-md-12">
                     <div class="row">
                         <?php
-                        $sql = "SELECT * FROM products";
+                        if (isset($_GET['category_id'])) {
+                            $category_id = intval($_GET['category_id']);
+                            $sql = "SELECT * FROM products WHERE category_id = $category_id";
+                        } else {
+                            $sql = "SELECT * FROM products";
+                        }
+
                         $query = $conn->query($sql);
 
                         if ($query->num_rows > 0) {
@@ -138,6 +144,8 @@ include_once 'partials/head.php';
                                 </div>
                         <?php
                             }
+                        } else {
+                            echo "No Product Found";
                         }
                         ?>
 
