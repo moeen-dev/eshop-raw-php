@@ -177,128 +177,44 @@ include_once 'partials/head.php';
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th>
-                                                        <div class="form-check form-check-muted m-0">
-                                                            <label class="form-check-label">
-                                                                <input type="checkbox" class="form-check-input">
-                                                            </label>
-                                                        </div>
-                                                    </th>
-                                                    <th> Client Name </th>
-                                                    <th> Order No </th>
-                                                    <th> Product Cost </th>
-                                                    <th> Project </th>
-                                                    <th> Payment Mode </th>
-                                                    <th> Start Date </th>
-                                                    <th> Payment Status </th>
+                                                    <th> # </th>
+                                                    <th> Name </th>
+                                                    <th> Address </th>
+                                                    <th> Phone Number </th>
+                                                    <th> Email </th>
+                                                    <th> Total </th>
+                                                    <th> Actions </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check form-check-muted m-0">
-                                                            <label class="form-check-label">
-                                                                <input type="checkbox" class="form-check-input">
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <img src="assets/images/faces/face1.jpg" alt="image" />
-                                                        <span class="pl-2">Henry Klein</span>
-                                                    </td>
-                                                    <td> 02312 </td>
-                                                    <td> $14,500 </td>
-                                                    <td> Dashboard </td>
-                                                    <td> Credit card </td>
-                                                    <td> 04 Dec 2019 </td>
-                                                    <td>
-                                                        <div class="badge badge-outline-success">Approved</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check form-check-muted m-0">
-                                                            <label class="form-check-label">
-                                                                <input type="checkbox" class="form-check-input">
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <img src="assets/images/faces/face2.jpg" alt="image" />
-                                                        <span class="pl-2">Estella Bryan</span>
-                                                    </td>
-                                                    <td> 02312 </td>
-                                                    <td> $14,500 </td>
-                                                    <td> Website </td>
-                                                    <td> Cash on delivered </td>
-                                                    <td> 04 Dec 2019 </td>
-                                                    <td>
-                                                        <div class="badge badge-outline-warning">Pending</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check form-check-muted m-0">
-                                                            <label class="form-check-label">
-                                                                <input type="checkbox" class="form-check-input">
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <img src="assets/images/faces/face5.jpg" alt="image" />
-                                                        <span class="pl-2">Lucy Abbott</span>
-                                                    </td>
-                                                    <td> 02312 </td>
-                                                    <td> $14,500 </td>
-                                                    <td> App design </td>
-                                                    <td> Credit card </td>
-                                                    <td> 04 Dec 2019 </td>
-                                                    <td>
-                                                        <div class="badge badge-outline-danger">Rejected</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check form-check-muted m-0">
-                                                            <label class="form-check-label">
-                                                                <input type="checkbox" class="form-check-input">
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <img src="assets/images/faces/face3.jpg" alt="image" />
-                                                        <span class="pl-2">Peter Gill</span>
-                                                    </td>
-                                                    <td> 02312 </td>
-                                                    <td> $14,500 </td>
-                                                    <td> Development </td>
-                                                    <td> Online Payment </td>
-                                                    <td> 04 Dec 2019 </td>
-                                                    <td>
-                                                        <div class="badge badge-outline-success">Approved</div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check form-check-muted m-0">
-                                                            <label class="form-check-label">
-                                                                <input type="checkbox" class="form-check-input">
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <img src="assets/images/faces/face4.jpg" alt="image" />
-                                                        <span class="pl-2">Sallie Reyes</span>
-                                                    </td>
-                                                    <td> 02312 </td>
-                                                    <td> $14,500 </td>
-                                                    <td> Website </td>
-                                                    <td> Credit card </td>
-                                                    <td> 04 Dec 2019 </td>
-                                                    <td>
-                                                        <div class="badge badge-outline-success">Approved</div>
-                                                    </td>
-                                                </tr>
+                                                <?php
+                                                $count = 1;
+                                                $sql = "SELECT * FROM orders ORDER BY id DESC";
+                                                $query = $conn->query($sql);
+
+                                                if ($query->num_rows > 0) {
+                                                    while ($order = $query->fetch_assoc()) {
+                                                ?>
+                                                        <tr>
+                                                            <td> <?php echo $count++; ?> </td>
+                                                            <td> <?php echo  $order['first_name'] . '' . $order['last_name']; ?> </td>
+                                                            <td> <?php echo $order['address']; ?> </td>
+                                                            <td> <?php echo $order['phone'] ?> </td>
+                                                            <td> <?php echo $order['email'] ?> </td>
+                                                            <td> <?php echo $order['total'] ?> </td>
+                                                            <td class="d-flex gap-3">
+                                                                <a href="order-edit.php?id=<?php echo $order['id']; ?>" class="btn btn-primary mr-2"> Edit</a>
+                                                                <form action="controller/ordercontroller.php" method="POST">
+                                                                    <input type="hidden" name="id" value="<?php echo $order['id']; ?>">
+                                                                    <button name="delete" class="btn btn-danger" onclick="return confirm('Do you want to delete it?') ">Delete</button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
+
                                             </tbody>
                                         </table>
                                     </div>
