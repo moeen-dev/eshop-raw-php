@@ -1,5 +1,9 @@
 <?php
 include_once 'controller/db.php';
+
+if (!isset($_SESSION['cart']) && isset($_COOKIE['cart_data'])) {
+    $_SESSION['cart'] = json_decode($_COOKIE['cart_data'], true);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -102,58 +106,69 @@ include_once 'partials/head.php';
         <div class="container">
             <div class="checkout__form">
                 <h4>Billing Details</h4>
-                <form action="#">
+                <form action="controller/place-order.php" method="POST">
                     <div class="row">
                         <div class="col-lg-8 col-md-6">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
-                                        <p>Fist Name<span>*</span></p>
-                                        <input type="text">
+                                        <p>First Name<span>*</span></p>
+                                        <input type="text" name="first_name" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Last Name<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="last_name" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input type="text">
+                                <input type="text" name="address" required>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Phone<span>*</span></p>
-                                        <input type="text">
+                                        <input type="text" name="phone" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text">
+                                        <input type="email" name="email" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="checkout__input">
-                                <p>Order notes<span>*</span></p>
-                                <input type="text"
-                                    placeholder="Notes about your order, e.g. special notes for delivery.">
+                                <p>Order Notes</p>
+                                <input type="text" name="notes" placeholder="Notes about your order">
                             </div>
                         </div>
+
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4>Your Order</h4>
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul>
-                                    <li>Vegetable’s Package <span>$75.99</span></li>
-                                    <li>Fresh Vegetable <span>$151.99</span></li>
-                                    <li>Organic Bananas <span>$53.99</span></li>
+                                    <?php
+                                    $subtotal = 0;
+                                    if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+                                        foreach ($_SESSION['cart'] as $item) {
+                                            $total = $item['price'] * $item['quantity'];
+                                            $subtotal += $total;
+                                            echo '<li>' . htmlspecialchars($item['name']) .
+                                                ' x ' . $item['quantity'] .
+                                                ' <span>$' . number_format($total, 2) . '</span></li>';
+                                        }
+                                    } else {
+                                        echo '<li>Your cart is empty<span>$0.00</span></li>';
+                                    }
+                                    ?>
                                 </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-                                <div class="checkout__order__total">Total <span>$750.99</span></div>
+                                <div class="checkout__order__subtotal">Subtotal <span>$<?php echo number_format($subtotal, 2); ?></span></div>
+                                <div class="checkout__order__total">Total <span>$<?php echo number_format($subtotal, 2); ?></span></div>
                                 <button type="submit" class="site-btn">PLACE ORDER</button>
                             </div>
                         </div>

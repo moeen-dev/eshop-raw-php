@@ -162,7 +162,7 @@ include_once 'partials/head.php';
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="#" class="primary-btn cart-btn cart-btn-right">Proceed To checkout</a>
+                        <a href="checkout.php" class="primary-btn cart-btn cart-btn-right">Proceed To checkout</a>
                     </div>
                 </div>
             </div>
