@@ -203,10 +203,10 @@ include_once 'partials/head.php';
                                                             <td> <?php echo $order['email'] ?> </td>
                                                             <td> <?php echo $order['total'] ?> </td>
                                                             <td class="d-flex gap-3">
-                                                                <a href="order-edit.php?id=<?php echo $order['id']; ?>" class="btn btn-primary mr-2"> Edit</a>
+                                                                <a href="order-edit.php?id=<?php echo $order['id']; ?>" class="btn btn-primary mr-2 disabled"> Edit</a>
                                                                 <form action="controller/ordercontroller.php" method="POST">
                                                                     <input type="hidden" name="id" value="<?php echo $order['id']; ?>">
-                                                                    <button name="delete" class="btn btn-danger" onclick="return confirm('Do you want to delete it?') ">Delete</button>
+                                                                    <a name="delete" class="btn btn-danger disabled">Delete</a>
                                                                 </form>
                                                             </td>
                                                         </tr>
