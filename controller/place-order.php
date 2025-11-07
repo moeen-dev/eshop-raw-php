@@ -18,6 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    $subtotal = 0;
+    foreach ($cart as $item) {
+        $subtotal += $item['price'] * $item['quantity'];
+    }
+
     // Save order info (example)
     $sql_order = "INSERT INTO orders (`first_name`, `last_name`, `address`, `phone`, `email`, `notes`, `total`) 
                   VALUES ('$first_name', '$last_name', '$address', '$phone', '$email', '$notes', '$subtotal')";
